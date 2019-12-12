@@ -79,7 +79,16 @@ body {
   animation: spin 1s linear infinite;
 }
 
-.navbar {
+.vacancies {
+  padding: 10px;
+}
+
+.navbar, .vacancies {
   color: white;
   background-color: #009e0f;
+}
+
+.fa {
+  font-size:96px;
+  color:black;
 }

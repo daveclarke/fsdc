@@ -21,6 +21,12 @@ new Vue({
             } finally {
                 this.isLoading = false;
             }
+        },
+        moment: function() { return this.moment(); }
+    },
+    filters: {
+        moment: function(date) {
+            return this.moment(date).format('D MMMM');
         }
     },
     computed: {

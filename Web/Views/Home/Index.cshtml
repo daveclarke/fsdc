@@ -5,26 +5,34 @@
 <div>
     <p></p>
     <div id="vacancies">
-        <div class="text-centre" id="loading">
-            <div class="loader" v-if="isLoading"></div>
-        </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg col-md-6">
+                <div class="col-lg col-md-6 text-center">
+                    <div><i class='fa fa-clock-o'></i></div>
                     <p>Flexible work hours to suit your lifestyle.</p>
                 </div>
-                <div class="col-lg col-md-6">
+                <div class="col-lg col-md-6 text-center">
+                    <div><i class='fa fa-bicycle'></i></div>
                     <p>A new bike to get around town!</p>
                 </div>
-                <div class="col-lg col-md-6">
+                <div class="col-lg col-md-6 text-center">
+                    <div><i class='fa fa-umbrella'></i></div>
                     <p>Discounted health insurance.</p>
                 </div>
-                <div class="col-lg col-md-6">
+                <div class="col-lg col-md-6 text-center">
+                    <div><i class='fa fa-map-marker'></i></div>
                     <p>Contemporary offices in a great location.</p>
                 </div>
             </div>
+            <div class="row">
+                <div class="col">
+                    <div id="loading">
+                        <div class="loader" v-if="isLoading"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="container">
+        <div class="container vacancies" >
             <div class="row">
                 <div class="col-md">
                     <h2>Our Vacancies</h2>
@@ -44,7 +52,7 @@
                     <div class="row">
                         <div class="container">
                             <div class="row">
-                                <div class="col-md-9">
+                                <div class="col-md-10">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-md-9"><h3><a :href="`/Home/${vacancy.id}`" >{{vacancy.title}}</a></h3></div>
@@ -55,7 +63,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3"><p>{{vacancy.postedDate}}</p></div>
+                                <div class="col-md-2"><p>{{ vacancy.postedDate | moment }}</p></div>
                             </div>
                         </div>
                     </div>
