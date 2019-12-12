@@ -12,6 +12,8 @@ using Web.Models;
 
 namespace Web.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class VacanciesController : Controller
     {
         private readonly ILogger<VacanciesController> _logger;
@@ -20,12 +22,16 @@ namespace Web.Controllers
 
         public VacanciesController(ILogger<VacanciesController> logger, IDataService dataService, IHttpClientFactory clientFactory)
         {
+            if (logger == null) throw new ArgumentNullException(nameof(logger));
+            if (dataService == null) throw new ArgumentNullException(nameof(dataService));
+            if (clientFactory == null) throw new ArgumentNullException(nameof(clientFactory));
+
             _logger = logger;
             _dataService = dataService;
             _clientFactory = clientFactory;
         }
 
-        [HttpGet("/vacancies")]
+        [HttpGet]
         public async Task<IActionResult> Get()
         {
             var vacancies = await _dataService.GetVacanciesAsync();

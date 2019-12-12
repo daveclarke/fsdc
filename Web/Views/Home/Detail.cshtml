@@ -1,0 +1,20 @@
+﻿@model VacancyLocationModel
+@{
+    ViewData["Title"] = "Vacancy";
+}
+
+<div>
+    <h1 class="text-center">Love your career. It's worth it.</h1>
+    <p></p>
+    <div id="vacancies">
+        <div class="text-centre" id="loading">
+            <div class="loader" v-if="isLoading"></div>
+        </div>
+
+        <h2>@Model.Title</h2>
+        <h4>@Model.LocationName</h4>
+        <p>@Model.Description</p>
+        <p>@Model.PostedDate</p>
+    </div>
+</div>
+

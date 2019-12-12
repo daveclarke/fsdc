@@ -6,7 +6,7 @@
     <h1 class="text-center">Love your career. It's worth it.</h1>
     <p></p>
     <div id="vacancies">
-        <div class="col-sm-12 text-centre" id="loading">
+        <div class="text-centre" id="loading">
             <div class="loader" v-if="isLoading"></div>
         </div>
 
@@ -18,7 +18,7 @@
                 </option>
             </select>
             <div v-for="vacancy in filteredLocations">
-                <h3>{{vacancy.title}}</h3>
+                <h3><a :href="`/Home/${vacancy.id}`" >{{vacancy.title}}</a></h3>
                 <h4>{{vacancy.locationName}}</h4>
                 <p>{{vacancy.description.substring(0, 130)}}</p>
                 <p>{{vacancy.postedDate}}</p>
@@ -26,3 +26,4 @@
         </div>
     </div>
 </div>
+

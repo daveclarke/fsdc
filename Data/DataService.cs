@@ -31,5 +31,19 @@ namespace Data
             }
             return vacancies;
         }
+
+        public async Task<Vacancy> GetVacancyByIdAsync(Guid id)
+        {
+            var vacancy = new Vacancy();
+            try
+            {
+                vacancy = await _dbContext.Vacancies.FindAsync(id).ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "### exception getting vacancies");
+            }
+            return vacancy;
+        }
     }
 }
