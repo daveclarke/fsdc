@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Data;
 using Microsoft.AspNetCore.Mvc;
@@ -14,16 +16,25 @@ namespace Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IDataService _dataService;
+        private readonly IHttpClientFactory _clientFactory;
 
-        public HomeController(ILogger<HomeController> logger, IDataService dataService)
+        public HomeController(ILogger<HomeController> logger, IDataService dataService, IHttpClientFactory clientFactory)
         {
             _logger = logger;
             _dataService = dataService;
+            _clientFactory = clientFactory;
         }
 
         public async Task<IActionResult> Index()
         {
             var vacancies = await _dataService.GetVacanciesAsync();
+            var locationClient = _clientFactory.CreateClient(Startup.LOCATION_CLIENT);
+            var locationResponse = await locationClient.GetAsync("location");
+            if (!locationResponse.IsSuccessStatusCode) return Error();
+
+            var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+            var locations = await JsonSerializer.DeserializeAsync<LocationModel[]>(await locationResponse.Content.ReadAsStreamAsync(), options);
+
             return View();
         }
 
