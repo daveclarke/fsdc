@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Data.Models;
 using System.Reflection;
 using System;
+using System.Globalization;
 
 namespace Data
 {
@@ -24,6 +25,7 @@ namespace Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             var now = DateTime.UtcNow;
+            var culture = new CultureInfo("en-NZ");
             modelBuilder.Entity<Vacancy>().HasData(
                 new Vacancy
                 {
@@ -32,7 +34,7 @@ namespace Data
                     Description = @"Holystone sutler line boatswain gangplank lad gibbet. Pink lanyard main sheet Plate Fleet rutters barque holystone. Case shot long clothes yard lugsail galleon dead men tell no tales to go on account. Keelhaul yo-ho-ho loot nipper list American Main fluke.
 Pillage furl blow the man down pinnace chase guns fire in the hole hulk. Cog spike cutlass Jack Tar aye mizzenmast handsomely. Gun Gold Road walk the plank boom draft hang the jib tender. Boatswain bilge gally brigantine tack yardarm chandler.",
                     LocationId = 3,
-                    PostedDate = DateTime.Parse("26/01/2019"),
+                    PostedDate = DateTime.Parse("26/01/2019", culture),
                     ModifiedDate = now,
                 },
                 new Vacancy
@@ -43,7 +45,7 @@ Pillage furl blow the man down pinnace chase guns fire in the hole hulk. Cog spi
 
 Haul wind lee Shiver me timbers strike colors handsomely Nelsons folly rigging. Plate Fleet Barbary Coast hail-shot cable quarterdeck list Pieces of Eight. Bowsprit aye pinnace cog Letter of Marque galleon lad. Shiver me timbers code of conduct bilge water yo-ho-ho loaded to the gunwalls driver skysail.",
                     LocationId = 2,
-                    PostedDate = DateTime.Parse("01/02/2019"),
+                    PostedDate = DateTime.Parse("01/02/2019", culture),
                     ModifiedDate = now,
                 },
                 new Vacancy
@@ -54,7 +56,7 @@ Haul wind lee Shiver me timbers strike colors handsomely Nelsons folly rigging. 
 
 Avast weigh anchor lugger execution dock mutiny run a shot across the bow chase guns. Deadlights coffer case shot stern gangway quarter interloper. Red ensign fluke gaff bucko skysail handsomely hempen halter. Topgallant starboard skysail hang the jib tender yawl coffer.",
                     LocationId = 2,
-                    PostedDate = DateTime.Parse("07/02/2019"),
+                    PostedDate = DateTime.Parse("07/02/2019", culture),
                     ModifiedDate = now,
                 },
                 new Vacancy
@@ -65,7 +67,7 @@ Avast weigh anchor lugger execution dock mutiny run a shot across the bow chase 
 
 American Main hands doubloon black spot knave broadside lanyard. Skysail gangplank black spot lookout pink clap of thunder yardarm. Sloop sheet careen trysail scuppers bucko black jack. Maroon ho pillage hearties jib overhaul doubloon.",
                     LocationId = 1,
-                    PostedDate = DateTime.Parse("14/02/2019"),
+                    PostedDate = DateTime.Parse("14/02/2019", culture),
                     ModifiedDate = now,
                 }
             );

@@ -21,8 +21,9 @@ namespace Web.Controllers
             _dataService = dataService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var vacancies = await _dataService.GetVacanciesAsync();
             return View();
         }
 
