@@ -2,17 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Web
 {
     public class Startup
     {
+        public static readonly string LOCATION_CLIENT = "locationClient";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -24,6 +28,10 @@ namespace Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddHttpClient(LOCATION_CLIENT, c => c.BaseAddress = new Uri("https://private-8dbaa-nibdevchallenge.apiary-mock.com/"));
+            services.AddDbContext<CareersDbContext>();
+            services.AddScoped<IDataService>(
+                provider => new DataService(provider.GetRequiredService<CareersDbContext>(), provider.GetRequiredService<ILogger<DataService>>()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

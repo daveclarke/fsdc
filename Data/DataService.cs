@@ -10,9 +10,9 @@ namespace Data
     public class DataService : IDataService
     {
         private readonly CareersDbContext _dbContext;
-        private readonly ILogger _logger;
+        private readonly ILogger<DataService> _logger;
 
-        public DataService(CareersDbContext dbContext, ILogger logger)
+        public DataService(CareersDbContext dbContext, ILogger<DataService> logger)
         {
             _dbContext = dbContext;
             _logger = logger; 
