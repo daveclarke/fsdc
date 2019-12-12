@@ -33,7 +33,18 @@ namespace Web.Controllers
             if (!locationResponse.IsSuccessStatusCode) return Error();
 
             var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-            var locations = await JsonSerializer.DeserializeAsync<LocationModel[]>(await locationResponse.Content.ReadAsStreamAsync(), options);
+            var locations = await JsonSerializer.DeserializeAsync<List<LocationModel>>(await locationResponse.Content.ReadAsStreamAsync(), options);
+
+            var vacancyLocation = vacancies.Join(locations, v => v.LocationId, l => l.Id, (v, l) => new VacancyLocationModel
+            {
+                Id = v.Id,
+                Title = v.Title,
+                Description = v.Description,
+                LocationId = l.Id,
+                LocationName = l.Name,
+                LocationState = l.State,
+                PostedDate = v.PostedDate,
+            });
 
             return View();
         }
