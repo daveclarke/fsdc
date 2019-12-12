@@ -15,37 +15,11 @@ namespace Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IDataService _dataService;
-        private readonly IHttpClientFactory _clientFactory;
 
-        public HomeController(ILogger<HomeController> logger, IDataService dataService, IHttpClientFactory clientFactory)
+        public HomeController(ILogger<HomeController> logger) { _logger = logger; }
+
+        public IActionResult Index()
         {
-            _logger = logger;
-            _dataService = dataService;
-            _clientFactory = clientFactory;
-        }
-
-        public async Task<IActionResult> Index()
-        {
-            var vacancies = await _dataService.GetVacanciesAsync();
-            var locationClient = _clientFactory.CreateClient(Startup.LOCATION_CLIENT);
-            var locationResponse = await locationClient.GetAsync("location");
-            if (!locationResponse.IsSuccessStatusCode) return Error();
-
-            var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-            var locations = await JsonSerializer.DeserializeAsync<List<LocationModel>>(await locationResponse.Content.ReadAsStreamAsync(), options);
-
-            var vacancyLocation = vacancies.Join(locations, v => v.LocationId, l => l.Id, (v, l) => new VacancyLocationModel
-            {
-                Id = v.Id,
-                Title = v.Title,
-                Description = v.Description,
-                LocationId = l.Id,
-                LocationName = l.Name,
-                LocationState = l.State,
-                PostedDate = v.PostedDate,
-            });
-
             return View();
         }
 
