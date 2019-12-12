@@ -3,25 +3,63 @@
 }
 
 <div>
-    <h1 class="text-center">Love your career. It's worth it.</h1>
     <p></p>
     <div id="vacancies">
         <div class="text-centre" id="loading">
             <div class="loader" v-if="isLoading"></div>
         </div>
-
-        <h2>Our Vacancies</h2>
-        <div v-if="!isLoading">
-            <select v-model="locationDd">
-                <option v-for="location in locations" v-bind:value="location.id">
-                    {{location.name}}
-                </option>
-            </select>
-            <div v-for="vacancy in filteredLocations">
-                <h3><a :href="`/Home/${vacancy.id}`" >{{vacancy.title}}</a></h3>
-                <h4>{{vacancy.locationName}}</h4>
-                <p>{{vacancy.description.substring(0, 130)}}</p>
-                <p>{{vacancy.postedDate}}</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg col-md-6">
+                    <p>Flexible work hours to suit your lifestyle.</p>
+                </div>
+                <div class="col-lg col-md-6">
+                    <p>A new bike to get around town!</p>
+                </div>
+                <div class="col-lg col-md-6">
+                    <p>Discounted health insurance.</p>
+                </div>
+                <div class="col-lg col-md-6">
+                    <p>Contemporary offices in a great location.</p>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md">
+                    <h2>Our Vacancies</h2>
+                </div>
+                <div class="col-md">
+                    <div v-if="!isLoading">
+                        <select v-model="locationDd">
+                            <option v-for="location in locations" v-bind:value="location.id">
+                                {{location.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div v-if="!isLoading">
+                <div v-for="vacancy in filteredLocations">
+                    <div class="row">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-9"><h3><a :href="`/Home/${vacancy.id}`" >{{vacancy.title}}</a></h3></div>
+                                            <div class="col-md-3"><h4>{{vacancy.locationName}}</h4></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12"><p>{{vacancy.description.substring(0, 130)}}</p></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3"><p>{{vacancy.postedDate}}</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

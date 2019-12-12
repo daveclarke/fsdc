@@ -79,3 +79,7 @@ body {
   animation: spin 1s linear infinite;
 }
 
+.navbar {
+  color: white;
+  background-color: #009e0f;
+}
